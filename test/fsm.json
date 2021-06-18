@@ -1,0 +1,43 @@
+  {
+    "user-actions-path": "./test",
+    "fsm": {
+      "info": "It is an example of a simple fsm description",
+      "first-state": {
+        "name": "first",
+        "init-action": "init_action"
+      },
+      "states": [
+        "first", 
+        "second", 
+        "last"
+      ],
+      "events": [
+        "event1",
+        "event2",
+        "event3" 
+      ],
+      "transitions": [
+        {
+          "name": "tr1",
+          "src": "first", 
+          "event": "event1", 
+          "target": "second",
+          "action": "action1" 
+        },
+        {
+          "name": "tr2",
+          "src": "second", 
+          "event": "event2", 
+          "target": "last",
+          "action": "action2" 
+        },
+        {
+          "name": "tr3",
+          "src": "last", 
+          "event": "event3", 
+          "target": "first",
+          "action": "action3" 
+        }
+      ]
+    }
+  }

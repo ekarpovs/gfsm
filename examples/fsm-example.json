@@ -1,0 +1,36 @@
+  {
+    "user-actions-path": ".",
+    "fsm": {
+      "info": "It is an example of a simple fsm description",
+      "states": [
+        "first", 
+        "second", 
+        "last"
+      ],
+      "events": [
+        "event1",
+        "event2",
+        "event3" 
+      ],
+      "transitions": [
+        {
+          "name": "tr1",
+          "src": "first", 
+          "event": "event1", 
+          "target": "second"
+        },
+        {
+          "name": "tr2",
+          "src": "second", 
+          "event": "event2", 
+          "target": "last"
+        },
+        {
+          "name": "tr3",
+          "src": "last", 
+          "event": "event3", 
+          "target": "first"
+        }
+      ]
+    }
+  }

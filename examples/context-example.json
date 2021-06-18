@@ -1,0 +1,7 @@
+  {
+    "info": "It is a context example for a simple fsm description",
+    "first-state": {
+      "name": "first",
+      "init-action": "init_action"
+    }
+  }
