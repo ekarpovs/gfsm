@@ -1,6 +1,6 @@
 # Generic Finite State Machine (GFSM)
 
-## It is a part of the [Image Processing Workshop](https://github.com/ekarpovs/image-processing-workshop) project. 
+## It is a part of the [Image Processing Workshop](https://github.com/ekarpovs/image-processing-workshop) project
 
 ### It is a Python implementation of FSM concept described in [On the Implementation of Finite State Machines](https://www.jillesvangurp.com/static/on_the_implementation_of_finite_state_machines.pdf)
 
@@ -8,7 +8,7 @@
 
 ### Additionally, working context(s) has to be created from context.json file(s)
 
-### File system structure:
+### File system structure
 
 _____
     |__ /gfsm/ - The generic fsm project files
