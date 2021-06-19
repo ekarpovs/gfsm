@@ -13,7 +13,7 @@
 _____
     |__ /gfsm/ - The generic fsm project files
     |
-    |__ /examples/ - the example of a real fsm and context descriptions
+    |__ /examples/ - the example of a real fsm and context definitions
     |
     |__ /test/ - test of fsm example
     |
