@@ -1,5 +1,5 @@
   {
-    "user-actions-path": "./test",
+    "user-actions-path": "./test-actions",
     "fsm": {
       "info": "It is an example of a simple fsm description",
       "first-state": {

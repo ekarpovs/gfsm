@@ -58,7 +58,7 @@ def main(**kwargs):
   fsm.dispatch('event2', context1) 
   fsm.dispatch('event3', context1) 
 
-  # with context#1
+  # with context#2
   fsm.dispatch('event1', context2) 
   fsm.dispatch('event2', context2) 
   fsm.dispatch('event2', context2) 
