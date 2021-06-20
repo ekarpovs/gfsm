@@ -49,7 +49,7 @@ class FsmBuilder():
       action = None
       if 'action' in trdef:
         tr_action = trdef['action'] # Load the action from actions implementation by name
-        action = operation_loader.get("actions.{}".format(tr_action))
+        action = operation_loader.get(tr_action)
         print("action", action)
       transition = Transition(tr_name, target, action)
       transitions[tr_name] = transition

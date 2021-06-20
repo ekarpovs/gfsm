@@ -22,21 +22,21 @@
           "src": "first", 
           "event": "event1", 
           "target": "second",
-          "action": "action1" 
+          "action": "actions.action1" 
         },
         {
           "name": "tr2",
           "src": "second", 
           "event": "event2", 
           "target": "last",
-          "action": "action2" 
+          "action": "actions.action2" 
         },
         {
           "name": "tr3",
           "src": "last", 
           "event": "event3", 
           "target": "first",
-          "action": "action3" 
+          "action": "actions.action3" 
         }
       ]
     }
