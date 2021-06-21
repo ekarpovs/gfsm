@@ -10,6 +10,10 @@ class FSM():
   def get_impl(self):
     return self.implementation
 
+  def get_fsm_action_wrapper(self):
+    return self.implementation['action-wrapper']
+
+
   def dispatch(self, event_name, context):
     print("current state", context.get_current_state().name)
     event = self.implementation['events'][event_name]

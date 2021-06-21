@@ -1,7 +1,8 @@
 {
   "info": "It is an example of a simple fsm description",
-  "user-actions-path": "./test-actions",
-  "user-actions-wrapper": "",
+  "user-actions-path": "./test",
+  "user-action-wrapper-path": "./test",
+  "user-action-wrapper-name": "actions.fsm_action",
   "states": [
     "first", 
     "second", 
