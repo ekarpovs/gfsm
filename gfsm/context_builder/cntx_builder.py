@@ -1,5 +1,6 @@
 import operation_loader
 from ..context import Context
+from ..action import fsm_action
 
 class ContextBuilder():
   def __init__(self):
@@ -10,7 +11,7 @@ class ContextBuilder():
     context = Context(config['name'])
     # set the context init action
     init_action_name = config['first-state']['init-action']
-    init_action = operation_loader.get(init_action_name)
+    init_action = fsm_action(operation_loader.get(init_action_name))
     context.set_init_action(init_action)
 
     # set init state 

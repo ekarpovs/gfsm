@@ -10,10 +10,10 @@ def fsm_action(implementation):
     key = "user_data"
     data = context.get(key)
 
-    context = implementation(data)
-    print("context", context.name)
+    data = implementation(data)
 
     # Store the new user data
+    print("context", context.name)
     context.put(key, data)
 
 

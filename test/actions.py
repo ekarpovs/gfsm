@@ -1,4 +1,4 @@
-from gfsm import fsm_action
+# User actions implementation
 
 def init_action(data):
   # Do thomething
