@@ -1,36 +1,38 @@
-  {
-    "user-actions-path": ".",
-    "fsm": {
-      "info": "It is an example of a simple fsm description",
-      "states": [
-        "first", 
-        "second", 
-        "last"
-      ],
-      "events": [
-        "event1",
-        "event2",
-        "event3" 
-      ],
-      "transitions": [
-        {
-          "name": "tr1",
-          "src": "first", 
-          "event": "event1", 
-          "target": "second"
-        },
-        {
-          "name": "tr2",
-          "src": "second", 
-          "event": "event2", 
-          "target": "last"
-        },
-        {
-          "name": "tr3",
-          "src": "last", 
-          "event": "event3", 
-          "target": "first"
-        }
-      ]
+{
+  "info": "It is an example of a simple fsm description",
+  "user-actions-path": "./test-actions",
+  "user-actions-wrapper": "",
+  "states": [
+    "first", 
+    "second", 
+    "last"
+  ],
+  "events": [
+    "event1",
+    "event2",
+    "event3" 
+  ],
+  "transitions": [
+    {
+      "name": "tr1",
+      "src": "first", 
+      "event": "event1", 
+      "target": "second",
+      "action": "actions.action1" 
+    },
+    {
+      "name": "tr2",
+      "src": "second", 
+      "event": "event2", 
+      "target": "last",
+      "action": "actions.action2" 
+    },
+    {
+      "name": "tr3",
+      "src": "last", 
+      "event": "event3", 
+      "target": "first",
+      "action": "actions.action3" 
     }
-  }
+  ]
+}

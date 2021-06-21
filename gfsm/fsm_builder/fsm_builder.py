@@ -16,13 +16,10 @@ class FsmBuilder():
 
   def build(self):
     self.set_build_environment()
-
+    print("FSM bulder. Build the {}".format(self.config['info']))
     fsm_implementation = {}
 
-    fsm_config = self.config['fsm']
-    print("FSM bulder. Build the {}".format(fsm_config['info']))
-
-    cfg_states = fsm_config['states']
+    cfg_states = self.config['states']
     states = {}
     for sn in cfg_states:
       print("State", sn)
@@ -30,7 +27,7 @@ class FsmBuilder():
 
     print("Created States", states)
 
-    cfg_events = fsm_config['events']
+    cfg_events = self.config['events']
     events = {}
     for en in cfg_events:
       print("Event", en)
@@ -38,7 +35,7 @@ class FsmBuilder():
     print("Created Events", events)  
 
 
-    cfg_transitions = fsm_config['transitions']
+    cfg_transitions = self.config['transitions']
     transitions = {}
     for trdef in cfg_transitions:
       print("Transition", trdef)
