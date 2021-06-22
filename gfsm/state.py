@@ -25,12 +25,11 @@ class State():
     self.transitions[event_name] = transition
 
   def dispatch(self, context, event_name):
-    print("State handle")
     if event_name in self.transitions:
       if self.exit_action is not None:
         self.exit_action(context)
       tr = self.transitions[event_name]
-      print("dispatch Transition", tr.name, tr.target.name)
+      print("src {} dispatch event {} - Transition {} to {}".format(self.name, event_name, tr.name, tr.target.name))
       self.transitions[event_name].execute(context)
     else:
-      print("dispatch - stay at the state", event_name)
+      print("src {} dispatch event {} - stay at the state".format(self.name, event_name))
