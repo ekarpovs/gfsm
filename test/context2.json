@@ -1,8 +1,0 @@
-  {
-    "info": "It is a description of context#1 for a simple fsm",
-    "name": "context#2",
-    "first-state": {
-      "name": "first",
-      "init-action": "actions.init_action"
-    }
-  }

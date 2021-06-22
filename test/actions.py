@@ -22,20 +22,62 @@ def fsm_action(implementation):
 
   return execute
 
-def init_action(data):
+def init_context(data):
   # Do thomething
   return data
 
-
-def action1(data):
+def entry_start(data):
   # Do thomething
   return data
 
-
-def action2(data):
+def exit_start(data):
   # Do thomething
   return data
 
-def action3(data):
+def entry_1(data):
+  # Do thomething
+  return data
+
+def exit_1(data):
+  # Do thomething
+  return data
+
+def entry_2(data):
+  # Do thomething
+  return data
+
+def exit_2(data):
+  # Do thomething
+  return data
+
+def entry_3(data):
+  # Do thomething
+  return data
+
+def exit_3(data):
+  # Do thomething
+  return data
+
+def entry_end(data):
+  # Do thomething
+  return data
+
+def exit_end(data):
+  # Do thomething
+  return data
+
+def action_1(data):
+  # Do thomething
+  return data
+
+def action_2(data):
+  # Do thomething
+  return data
+
+def action_3(data):
+  # Do thomething
+  return data
+
+def action_4(data):
   # Do thomething
   return data

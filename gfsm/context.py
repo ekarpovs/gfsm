@@ -10,14 +10,20 @@ class Context():
     self.name = name
     #  an object repository for actions
     self.data_repo = dict() # may be stack
-    
+    self.data_repo['user_data'] = dict()
+
     self.current_state = None
     self.init_action = None
+    self.fsm_action_wrapper = None
+
+  def set_fsm_action_wrapper(self, wrapper):
+    self.fsm_action_wrapper = wrapper
+
+  def get_fsm_action_wrapper(self):
+    return self.fsm_action_wrapper
 
   def set_current_state(self, state):
     self.current_state = state
-    if self.current_state.entry_action is not None:
-      self.current_state.enter_action(self)
   
   def get_current_state(self):
     return self.current_state
@@ -39,6 +45,8 @@ class Context():
       return self.data_repo[key]
     return None
 
-  def dispatch(self, event):
-    self.current_state.dispatch(self, event)
+  def dispatch(self, event_name):
+    print("current state", self.current_state.name)
+    self.current_state.dispatch(self, event_name)
+    print("new state", self.current_state.name)
   

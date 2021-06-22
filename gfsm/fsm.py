@@ -4,19 +4,16 @@ from .state import State
 from .transition import Transition
 
 class FSM():
-  def __init__(self, implementation):
-    self.implementation = implementation
-
-  def get_impl(self):
-    return self.implementation
-
-  def get_fsm_action_wrapper(self):
-    return self.implementation['action-wrapper']
+  def __init__(self, cntx_name, first_state, wrapper):
+    self.context = Context(cntx_name)
+    self.context.set_current_state(first_state)
+    self.context.set_fsm_action_wrapper(wrapper)
 
 
-  def dispatch(self, event_name, context):
-    print("current state", context.get_current_state().name)
-    event = self.implementation['events'][event_name]
-    context.dispatch(event)
-    print("new state", context.get_current_state().name)
+  # def get_fsm_action_wrapper(self):
+  #   return self.context.get_fsm_action_wrapper()
+
+
+  def dispatch(self, event_name):
+    self.context.dispatch(event_name)
   

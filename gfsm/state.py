@@ -21,16 +21,16 @@ class State():
     self.exit_action = action
 
   # the method to associate events with transitions.
-  def add_transition(self, event, transition):
-    self.transitions[event.name] = transition
+  def add_transition(self, event_name, transition):
+    self.transitions[event_name] = transition
 
-  def dispatch(self, context, event):
+  def dispatch(self, context, event_name):
     print("State handle")
-    if event.name in self.transitions:
+    if event_name in self.transitions:
       if self.exit_action is not None:
         self.exit_action(context)
-      tr = self.transitions[event.name]
+      tr = self.transitions[event_name]
       print("dispatch Transition", tr.name, tr.target.name)
-      self.transitions[event.name].execute(context)
+      self.transitions[event_name].execute(context)
     else:
-      print("dispatch - stay at the state", event.name)
+      print("dispatch - stay at the state", event_name)

@@ -1,39 +1,76 @@
 {
   "info": "It is an example of a simple fsm description",
-  "user-actions-path": "./test",
+  "user-actions-paths": [
+    "./test"
+  ],
   "user-action-wrapper-path": "./test",
   "user-action-wrapper-name": "actions.fsm_action",
+  "context-name": "gfsm-test",
+  "init-action": "actions.init_context",
+  "first-state": "start",
   "states": [
-    "first", 
-    "second", 
-    "last"
+    {
+      "name":"start",
+      "entry-action": "actions.entry_start",
+      "exit-action": "actions.exit_start"
+    }, 
+    {
+      "name":"state1",
+      "entry-action": "actions.entry_1",
+      "exit-action": "actions.exit_1"
+    }, 
+    {
+      "name":"state2",
+      "entry-action": "actions.entry_2",
+      "exit-action": "actions.exit_2"
+    }, 
+    {
+      "name":"state3",
+      "entry-action": "actions.entry_3",
+      "exit-action": "actions.exit_3"
+    }, 
+    {
+      "name":"end",
+      "entry-action": "actions.entry_end",
+      "exit-action": "actions.exit_end"
+    }
   ],
   "events": [
-    "event1",
-    "event2",
-    "event3" 
+    "to1",
+    "to2",
+    "to3",
+    "toend",
+    "tostart",
+    "end" 
   ],
   "transitions": [
     {
       "name": "tr1",
-      "src": "first", 
-      "event": "event1", 
-      "target": "second",
-      "action": "actions.action1" 
+      "src": "start", 
+      "event": "to1", 
+      "target": "state1",
+      "action": "actions.action_1" 
     },
     {
       "name": "tr2",
-      "src": "second", 
-      "event": "event2", 
-      "target": "last",
-      "action": "actions.action2" 
+      "src": "state1", 
+      "event": "to2", 
+      "target": "state2",
+      "action": "actions.action_2" 
     },
     {
       "name": "tr3",
-      "src": "last", 
-      "event": "event3", 
-      "target": "first",
-      "action": "actions.action3" 
+      "src": "state2", 
+      "event": "to2", 
+      "target": "state2",
+      "action": "actions.action_3" 
+    },
+    {
+      "name": "tr4",
+      "src": "state2", 
+      "event": "to3", 
+      "target": "state3",
+      "action": "actions.action_4" 
     }
   ]
 }

@@ -1,9 +1,0 @@
-  {
-    "info": "It is a context example for a simple fsm description",
-    "name": "test_context",
-    "first-state": {
-      "name": "first",
-      "init-action": "actions.init_action"
-    }
-  }
-
