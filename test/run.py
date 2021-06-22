@@ -36,9 +36,7 @@ def main(**kwargs):
   fsm_impl = fsm_builder.build()
 
   # Instantiate the gfsm (create context)
-  first_state = fsm_impl['first-state']
-  wrapper = fsm_impl['action-wrapper']
-  fsm = FSM('cntx_test', first_state, wrapper)
+  fsm = FSM(fsm_impl, 'cntx_test')
 
   # Run test
   # with the context
