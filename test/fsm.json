@@ -1,5 +1,5 @@
 {
-  "info": "It is an example of a simple fsm description",
+  "info": "It is an example of a simple fsm definition",
   "user-actions-paths": [
     "./test"
   ],

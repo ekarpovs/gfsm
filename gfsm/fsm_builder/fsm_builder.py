@@ -78,8 +78,9 @@ class FsmBuilder():
       action = None
       if 'action' in trdef:
         tr_action = trdef['action'] # Load the action from actions implementation by name
-        action = self.action_wrapper(operation_loader.get(tr_action))
-        print("action", action)
+        if self.is_correct_action_name(tr_action):
+          action = self.action_wrapper(operation_loader.get(tr_action))
+          print("action", action)
       transition = Transition(tr_name, target, action)
       transitions[tr_name] = transition
       # event = Event(tr_event)

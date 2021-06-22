@@ -21,5 +21,6 @@ class Transition():
     self.action_after = action
 
   def execute(self, context):
-    self.action(context)
+    if self.action is not None:
+      self.action(context)
     context.set_current_state(self.target)
