@@ -66,7 +66,7 @@ class FsmBuilder():
   def build_transitions(self, trs_def, states):
     transitions = {}
     for tr_def in trs_def:
-      print("Transition", tr_def)
+      # print("Transition", tr_def)
       transition = self.build_transition(tr_def, states)
     transitions[tr_def['name']] = transition
 
@@ -75,7 +75,7 @@ class FsmBuilder():
 
   def build(self):
     self.set_runtime_environment()
-    print("FSM bulder. Build the {}".format(self.config['info']))
+    print("FSM bulder. Build the fsm implementation from: {}".format(self.config['info']))
     fsm_implementation = {}
     # build states
     states_def = self.config['states']
