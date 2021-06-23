@@ -23,6 +23,9 @@ class Context():
     return self.fsm_action_wrapper
 
   def set_current_state(self, state):
+    entry_action = state.get_entry_action()
+    if entry_action is not None:
+      entry_action(self)
     self.current_state = state
   
   def get_current_state(self):

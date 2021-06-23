@@ -17,6 +17,9 @@ class State():
   def set_entry_action(self, action):
     self.entry_action = action
 
+  def get_entry_action(self):
+    return self.entry_action
+
   def set_exit_action(self, action):
     self.exit_action = action
 
