@@ -12,65 +12,118 @@
     {
       "name":"start",
       "entry-action": "actions.entry_start",
-      "exit-action": "actions.exit_start"
+      "exit-action": "actions.exit_start",
+      "transitions": [
+        {
+          "name": "tr01",
+          "src": "start", 
+          "event": "next", 
+          "target": "state1",
+          "action": "actions.action_1" 
+        }
+      ]
     }, 
     {
       "name":"state1",
       "entry-action": "actions.entry_1",
-      "exit-action": "actions.exit_1"
+      "exit-action": "actions.exit_1",
+      "transitions": [
+        {
+          "name": "tr11",
+          "src": "state1", 
+          "event": "next", 
+          "target": "state2",
+          "action": "actions.action_2" 
+        },
+        {
+          "name": "tr12",
+          "src": "state1", 
+          "event": "repeat", 
+          "target": "state1",
+          "action": "" 
+        },
+        {
+          "name": "tr13",
+          "src": "state1", 
+          "event": "prev", 
+          "target": "start",
+          "action": "" 
+        }
+      ]
     }, 
     {
       "name":"state2",
       "entry-action": "actions.entry_2",
-      "exit-action": "actions.exit_2"
+      "exit-action": "actions.exit_2",
+      "transitions": [
+        {
+          "name": "tr21",
+          "src": "state2", 
+          "event": "next", 
+          "target": "state3",
+          "action": "actions.action_3" 
+        },
+        {
+          "name": "tr22",
+          "src": "state2", 
+          "event": "repeat", 
+          "target": "state2",
+          "action": "" 
+        },
+        {
+          "name": "tr23",
+          "src": "state2", 
+          "event": "prev", 
+          "target": "state1",
+          "action": "" 
+        }
+      ]
     }, 
     {
       "name":"state3",
       "entry-action": "actions.entry_3",
-      "exit-action": "actions.exit_3"
+      "exit-action": "actions.exit_3",
+      "transitions": [
+        {
+          "name": "tr31",
+          "src": "state3", 
+          "event": "next", 
+          "target": "end",
+          "action": "actions.action_4" 
+        },
+        {
+          "name": "tr32",
+          "src": "state3", 
+          "event": "repeat", 
+          "target": "state3",
+          "action": "" 
+        },
+        {
+          "name": "tr33",
+          "src": "state3", 
+          "event": "prev", 
+          "target": "state2",
+          "action": "" 
+        }      ]
     }, 
     {
       "name":"end",
       "entry-action": "actions.entry_end",
-      "exit-action": "actions.exit_end"
+      "exit-action": "actions.exit_end",
+      "transitions": [
+        {
+          "name": "end1",
+          "src": "end", 
+          "event": "prev", 
+          "target": "state3",
+          "action": "" 
+        }
+      ]
     }
   ],
   "events": [
-    "to1",
-    "to2",
-    "to3",
-    "toend",
-    "tostart",
-    "end" 
-  ],
-  "transitions": [
-    {
-      "name": "tr1",
-      "src": "start", 
-      "event": "to1", 
-      "target": "state1",
-      "action": "actions.action_1" 
-    },
-    {
-      "name": "tr2",
-      "src": "state1", 
-      "event": "to2", 
-      "target": "state2",
-      "action": "actions.action_2" 
-    },
-    {
-      "name": "tr3",
-      "src": "state2", 
-      "event": "to2", 
-      "target": "state2",
-      "action": "actions.action_3" 
-    },
-    {
-      "name": "tr4",
-      "src": "state2", 
-      "event": "to3", 
-      "target": "state3",
-      "action": "actions.action_4" 
-    }
+    "next",
+    "prev",
+    "repeat"
   ]
 }

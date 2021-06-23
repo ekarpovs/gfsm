@@ -41,53 +41,62 @@ class FsmBuilder():
     state = State(name)
     state.set_entry_action(entry_action)
     state.set_exit_action(exit_action)     
+
     return state
+
+  def build_transition(self, tr_def, states):
+    tr_name = tr_def['name']
+    tr_event = tr_def['event']
+    src = states[tr_def['src']]
+    target = states[tr_def['target']] 
+    tr_action = None
+    action = None
+    if 'action' in tr_def:
+      tr_action = tr_def['action'] # Load the action from actions implementation by name
+      if self.is_correct_action_name(tr_action):
+        action = self.action_wrapper(operation_loader.get(tr_action))
+        # print("action", action)
+    transition = Transition(tr_name, target, action)
+    # print("Associate event with Transition via State")
+    src.add_transition(tr_event, transition)
+
+    return transition
+
+
+  def build_transitions(self, trs_def, states):
+    transitions = {}
+    for tr_def in trs_def:
+      print("Transition", tr_def)
+      transition = self.build_transition(tr_def, states)
+    transitions[tr_def['name']] = transition
+
+    return transitions
 
 
   def build(self):
     self.set_runtime_environment()
     print("FSM bulder. Build the {}".format(self.config['info']))
     fsm_implementation = {}
-
+    # build states
     states_def = self.config['states']
     states = {}
     for state_def in states_def:
-      print("State", state_def)
+      # print("State", state_def)
       state = self.build_state(state_def)
       states[state.name] = state
-
-    print("Created States", states)
-
-    cfg_events = self.config['events']
+    # print("Created States", states)
+    # build events
+    events_def = self.config['events']
     events = {}
-    for en in cfg_events:
-      print("Event", en)
+    for en in events_def:
+      # print("Event", en)
       events[en] = Event(en)
-    print("Created Events", events)  
-
-
-    cfg_transitions = self.config['transitions']
-    transitions = {}
-    for trdef in cfg_transitions:
-      print("Transition", trdef)
-      tr_name = trdef['name']
-      tr_event = trdef['event']
-      src = states[trdef['src']]
-      target = states[trdef['target']] 
-      tr_action = None
-      action = None
-      if 'action' in trdef:
-        tr_action = trdef['action'] # Load the action from actions implementation by name
-        if self.is_correct_action_name(tr_action):
-          action = self.action_wrapper(operation_loader.get(tr_action))
-          print("action", action)
-      transition = Transition(tr_name, target, action)
-      transitions[tr_name] = transition
-      # event = Event(tr_event)
-      print("Associate event with Transition via State")
-      src.add_transition(tr_event, transition)
-    print("Created Transitions", transitions)  
-
+    # print("Created Events", events)  
+    # build transitions and sssociate events with Transition via State"
+    for state_def in states_def:
+      trs_def = state_def['transitions']
+      transitions = self.build_transitions(trs_def, states)
+    # Setup FSM implementation
     fsm_implementation['first-state'] = states[self.config['first-state']]
     fsm_implementation['action-wrapper'] = self.action_wrapper
     fsm_implementation['events'] = events

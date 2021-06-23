@@ -34,19 +34,29 @@ def main(**kwargs):
   fsm_conf = readConfig()
   fsm_builder = FsmBuilder(fsm_conf)
   fsm_impl = fsm_builder.build()
-
   # Instantiate the gfsm (create context)
   fsm = FSM(fsm_impl, 'cntx_test')
 
   # Run test
-  # with the context
-  fsm.dispatch('to1') 
-  fsm.dispatch('to2') 
-  fsm.dispatch('to3') 
-  fsm.dispatch('to1') 
-  fsm.dispatch('tostart') 
-  fsm.dispatch('toend') 
-
+  # state start
+  fsm.dispatch('next')
+  # state 1 
+  fsm.dispatch('prev')
+  fsm.dispatch('next')
+  fsm.dispatch('repeat')
+  fsm.dispatch('next')
+  # state 2
+  fsm.dispatch('prev')
+  fsm.dispatch('next')
+  fsm.dispatch('repeat')
+  fsm.dispatch('next')
+  # state 3
+  fsm.dispatch('prev')
+  fsm.dispatch('next')
+  fsm.dispatch('repeat')
+  fsm.dispatch('next')
+  # state end
+  fsm.dispatch('prev')
 
 
 
