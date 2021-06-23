@@ -1,10 +1,5 @@
 {
-  "info": "Example of a simple fsm definition",
-  "user-actions-paths": [
-    "./test"
-  ],
-  "user-action-wrapper-path": "./test",
-  "user-action-wrapper-name": "actions.fsm_action",
+  "info": "Definition of a test fsm example",
   "context-name": "gfsm-test",
   "init-action": "actions.init_context",
   "first-state": "start",
@@ -120,10 +115,5 @@
         }
       ]
     }
-  ],
-  "events": [
-    "next",
-    "prev",
-    "repeat"
   ]
 }

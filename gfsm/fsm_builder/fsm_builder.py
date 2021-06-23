@@ -7,8 +7,9 @@ from gfsm.state import State
 from ..action import fsm_action
 
 class FsmBuilder():
-  def __init__(self, config):
+  def __init__(self, config, definition):
     self.config = config
+    self.definition = definition
     self.action_wrapper = fsm_action
 
   @staticmethod
@@ -77,14 +78,6 @@ class FsmBuilder():
     self.set_runtime_environment()
     print("FSM bulder. Build the fsm implementation from: {}".format(self.config['info']))
     fsm_implementation = {}
-    # build states
-    states_def = self.config['states']
-    states = {}
-    for state_def in states_def:
-      # print("State", state_def)
-      state = self.build_state(state_def)
-      states[state.name] = state
-    # print("Created States", states)
     # build events
     events_def = self.config['events']
     events = {}
@@ -92,14 +85,23 @@ class FsmBuilder():
       # print("Event", en)
       events[en] = Event(en)
     # print("Created Events", events)  
+
+    # build states
+    states_def = self.definition['states']
+    states = {}
+    for state_def in states_def:
+      # print("State", state_def)
+      state = self.build_state(state_def)
+      states[state.name] = state
+    # print("Created States", states)
     # build transitions and sssociate events with Transition via State"
     for state_def in states_def:
       trs_def = state_def['transitions']
       transitions = self.build_transitions(trs_def, states)
     # Setup FSM implementation
-    fsm_implementation['first-state'] = states[self.config['first-state']]
-    fsm_implementation['action-wrapper'] = self.action_wrapper
     fsm_implementation['events'] = events
+    fsm_implementation['action-wrapper'] = self.action_wrapper
+    fsm_implementation['first-state'] = states[self.definition['first-state']]
     fsm_implementation['states'] = states
     fsm_implementation['transitions'] = transitions
 

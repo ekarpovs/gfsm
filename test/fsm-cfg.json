@@ -1,0 +1,14 @@
+{
+  "info": "Configuration of a test fsm example",
+  "user-actions-paths": [
+    "./test"
+  ],
+  "user-action-wrapper-path": "./test",
+  "user-action-wrapper-name": "actions.fsm_action",
+  "events": [
+    "next",
+    "prev",
+    "repeat"
+  ]
+}
+

@@ -30,13 +30,17 @@ def readJson(ffn):
 
 # Read configuration file
 def readConfig():
-  return readJson('./test/fsm.json')
+  return readJson('./test/fsm-cfg.json')
+
+def readDef():
+  return readJson('./test/fsm-def.json')
 
 
 # Main function
 def main(**kwargs): 
   fsm_conf = readConfig()
-  fsm_builder = FsmBuilder(fsm_conf)
+  fsm_def = readDef()
+  fsm_builder = FsmBuilder(fsm_conf, fsm_def)
   fsm_impl = fsm_builder.build()
   # Instantiate the gfsm (create context)
   wrapper = fsm_impl['action-wrapper']
