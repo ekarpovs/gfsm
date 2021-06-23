@@ -10,7 +10,7 @@ class Context():
     self.name = name
     #  an object repository for actions
     self.data_repo = dict() # may be stack
-    self.data_repo['user_data'] = dict()
+    self.data_repo['user-data'] = dict()
 
     self.current_state = None
     self.init_action = None
