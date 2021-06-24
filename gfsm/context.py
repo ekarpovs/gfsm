@@ -14,13 +14,7 @@ class Context():
 
     self.current_state = None
     self.init_action = None
-    self.fsm_action_wrapper = None
 
-  def set_fsm_action_wrapper(self, wrapper):
-    self.fsm_action_wrapper = wrapper
-
-  def get_fsm_action_wrapper(self):
-    return self.fsm_action_wrapper
 
   def set_current_state(self, state):
     entry_action = state.get_entry_action()
@@ -31,15 +25,15 @@ class Context():
   def get_current_state(self):
     return self.current_state
 
-
   def set_init_action(self, action):
     self.init_action = action
 
   # This action is used to pre-define variables for the actions in the FSM
   def run_init_action(self):
     if self.init_action is not None:
-      self.init_action()
+      self.init_action(self)
 
+  # store restore user data
   def put(self, key, data):
     self.data_repo[key] = data
 
@@ -48,6 +42,7 @@ class Context():
       return self.data_repo[key]
     return None
 
+  # perform event
   def dispatch(self, event_name):
     print("current state", self.current_state.name)
     self.current_state.dispatch(self, event_name)

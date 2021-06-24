@@ -8,7 +8,6 @@
 '''
 class State():
   def __init__(self, name):
-    from .transition import Transition
     self.name = name
     self.entry_action = None
     self.exit_action = None

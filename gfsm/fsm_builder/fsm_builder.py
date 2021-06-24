@@ -14,31 +14,39 @@ class FsmBuilder():
 
   @staticmethod
   def is_correct_action_name(name):
-    if len(name) > 3 and '.' in name:
+    if name and name.strip() and len(name) >= 3 and '.' in name:
       return True
     return False
+
+  @staticmethod
+  def get_value(data, key):
+    if key and key.strip() and key in data:
+      return data[key]
+    return ''
   
+
+
   def set_runtime_environment(self):
-    user_actions_paths = self.config['user-actions-paths']
+    user_actions_paths = self.get_value(self.config, 'user-actions-paths')
     for path in user_actions_paths:
       sys.path.append(path)
-    user_action_wrapper_path = self.config['user-action-wrapper-path']
+    user_action_wrapper_path = self.get_value(self.config, 'user-action-wrapper-path')
     if len(user_action_wrapper_path) > 1:
       sys.path.append(user_action_wrapper_path)
-    user_action_wrapper_name = self.config['user-action-wrapper-name']
+    user_action_wrapper_name = self.get_value(self.config, 'user-action-wrapper-name')
     if self.is_correct_action_name(user_action_wrapper_name):
       self.action_wrapper = operation_loader.get(user_action_wrapper_name)
 
+  # Load the action from actions implementation by name
+  def load_action(self, action_name):
+    if self.is_correct_action_name(action_name):
+      return self.action_wrapper(operation_loader.get(action_name))
+    return None
+
   def build_state(self, state_def):
-    name = state_def['name']
-    entry_action = None
-    exit_action = None
-    entry_action_name = state_def['entry-action']
-    if self.is_correct_action_name(entry_action_name):
-      entry_action = self.action_wrapper(operation_loader.get(entry_action_name))
-    exit_action_name = state_def['exit-action']
-    if self.is_correct_action_name(exit_action_name):
-      exit_action = self.action_wrapper(operation_loader.get(exit_action_name))
+    name = self.get_value(state_def, 'name')
+    entry_action = self.load_action(self.get_value(state_def, 'entry-action'))
+    exit_action = self.load_action(self.get_value(state_def, 'exit-action'))
     state = State(name)
     state.set_entry_action(entry_action)
     state.set_exit_action(exit_action)     
@@ -46,19 +54,16 @@ class FsmBuilder():
     return state
 
   def build_transition(self, tr_def, states):
-    tr_name = tr_def['name']
-    tr_event = tr_def['event']
-    src = states[tr_def['src']]
-    target = states[tr_def['target']] 
-    tr_action = None
-    action = None
-    if 'action' in tr_def:
-      tr_action = tr_def['action'] # Load the action from actions implementation by name
-      if self.is_correct_action_name(tr_action):
-        action = self.action_wrapper(operation_loader.get(tr_action))
+    tr_name = self.get_value(tr_def, 'name')
+    tr_event = self.get_value(tr_def, 'event')
+    target = states[self.get_value(tr_def, 'target')] 
+    tr_action = self.get_value(tr_def, 'action')
+    action = self.load_action(tr_action)
         # print("action", action)
     transition = Transition(tr_name, target, action)
     # print("Associate event with Transition via State")
+    # associate the event with Transition via State
+    src = states[self.get_value(tr_def, 'src')]
     src.add_transition(tr_event, transition)
 
     return transition
@@ -69,7 +74,7 @@ class FsmBuilder():
     for tr_def in trs_def:
       # print("Transition", tr_def)
       transition = self.build_transition(tr_def, states)
-    transitions[tr_def['name']] = transition
+    transitions[self.get_value(tr_def, 'name')] = transition
 
     return transitions
 
@@ -87,7 +92,7 @@ class FsmBuilder():
     # print("Created Events", events)  
 
     # build states
-    states_def = self.definition['states']
+    states_def = self.get_value(self.definition,'states')
     states = {}
     for state_def in states_def:
       # print("State", state_def)
@@ -96,12 +101,16 @@ class FsmBuilder():
     # print("Created States", states)
     # build transitions and sssociate events with Transition via State"
     for state_def in states_def:
-      trs_def = state_def['transitions']
+      trs_def = self.get_value(state_def, 'transitions')
       transitions = self.build_transitions(trs_def, states)
+
+    # get init action
+    init_action = self.load_action(self.get_value(self.definition, 'init-action'))
+
     # Setup FSM implementation
+    fsm_implementation['init-action'] = init_action
     fsm_implementation['events'] = events
-    fsm_implementation['action-wrapper'] = self.action_wrapper
-    fsm_implementation['first-state'] = states[self.definition['first-state']]
+    fsm_implementation['first-state'] = states[self.get_value(self.definition, 'first-state')]
     fsm_implementation['states'] = states
     fsm_implementation['transitions'] = transitions
 

@@ -7,13 +7,7 @@ class Transition():
     self.name = name
     self.target = target
     self.action = action
-    self.action_before = None
-    self.action_after = None
 
-  def process(self):
-    pass
-
-  
   def set_action_before(self, action):
     self.action_before = action
 

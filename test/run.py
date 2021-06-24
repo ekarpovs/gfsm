@@ -11,10 +11,6 @@ from gfsm.fsm_builder.fsm_builder import FsmBuilder
 # Construct the argument parser and parse the arguments
 def parseArgs():
   ap = argparse.ArgumentParser(description="generic fsm")
-  ap.add_argument("-i", "--input", required = True,
-	help = "full path to the input file(s)")
-  ap.add_argument("-o", "--output", required = False,
-	help = "full path to the output file(s)")
   ap.add_argument("-t", "--trace", required = False,
   default=False,
 	help = "print output")
@@ -40,13 +36,11 @@ def readDef():
 def main(**kwargs): 
   fsm_conf = readConfig()
   fsm_def = readDef()
+  # Create single fsm engine
   fsm_builder = FsmBuilder(fsm_conf, fsm_def)
   fsm_impl = fsm_builder.build()
   # Instantiate the gfsm (create context)
-  wrapper = fsm_impl['action-wrapper']
-  fsm = FSM(wrapper, 'cntx_test')
-  context = fsm.get_context()
-  context.set_current_state(fsm_impl['first-state'])
+  fsm = FSM(fsm_impl, 'cntx_test')
 
   # Run test
   # state start
