@@ -23,8 +23,6 @@ class FsmBuilder():
     if key and key.strip() and key in data:
       return data[key]
     return ''
-  
-
 
   def set_runtime_environment(self):
     user_actions_paths = self.get_value(self.config, 'user-actions-paths')
@@ -59,9 +57,7 @@ class FsmBuilder():
     target = states[self.get_value(tr_def, 'target')] 
     tr_action = self.get_value(tr_def, 'action')
     action = self.load_action(tr_action)
-        # print("action", action)
     transition = Transition(tr_name, target, action)
-    # print("Associate event with Transition via State")
     # associate the event with Transition via State
     src = states[self.get_value(tr_def, 'src')]
     src.add_transition(tr_event, transition)
@@ -70,13 +66,9 @@ class FsmBuilder():
 
 
   def build_transitions(self, trs_def, states):
-    transitions = {}
     for tr_def in trs_def:
-      # print("Transition", tr_def)
-      transition = self.build_transition(tr_def, states)
-    transitions[self.get_value(tr_def, 'name')] = transition
-
-    return transitions
+      self.build_transition(tr_def, states)
+    return
 
 
   def build(self):
@@ -87,22 +79,18 @@ class FsmBuilder():
     events_def = self.config['events']
     events = {}
     for en in events_def:
-      # print("Event", en)
       events[en] = Event(en)
-    # print("Created Events", events)  
 
     # build states
     states_def = self.get_value(self.definition,'states')
     states = {}
     for state_def in states_def:
-      # print("State", state_def)
       state = self.build_state(state_def)
       states[state.name] = state
-    # print("Created States", states)
     # build transitions and sssociate events with Transition via State"
     for state_def in states_def:
       trs_def = self.get_value(state_def, 'transitions')
-      transitions = self.build_transitions(trs_def, states)
+      self.build_transitions(trs_def, states)
 
     # get init action
     init_action = self.load_action(self.get_value(self.definition, 'init-action'))
@@ -112,6 +100,5 @@ class FsmBuilder():
     fsm_implementation['events'] = events
     fsm_implementation['first-state'] = states[self.get_value(self.definition, 'first-state')]
     fsm_implementation['states'] = states
-    fsm_implementation['transitions'] = transitions
 
     return fsm_implementation
