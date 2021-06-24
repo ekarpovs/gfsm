@@ -10,9 +10,9 @@ def fsm_action(implementation):
     # Get a relevant user datacls
     key = "user_data"
     data = context.get(key)
-    current_state = context.get_current_state()
-    if current_state:
-      print("current state", current_state.name)
+    # current_state = context.get_current_state()
+    # if current_state:
+    #   print("current state", current_state.name)
 
     data = implementation(data)
 
