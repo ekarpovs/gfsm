@@ -42,10 +42,11 @@ class FsmBuilder():
     return None
 
   def build_state(self, state_def):
+    id = self.get_value(state_def, 'id')
     name = self.get_value(state_def, 'name')
     entry_action = self.load_action(self.get_value(state_def, 'entry-action'))
     exit_action = self.load_action(self.get_value(state_def, 'exit-action'))
-    state = State(name)
+    state = State(id, name)
     state.set_entry_action(entry_action)
     state.set_exit_action(exit_action)     
 

@@ -5,6 +5,7 @@
   "first-state": "start",
   "states": [
     {
+      "id":"001",
       "name":"start",
       "entry-action": "actions.entry_start",
       "exit-action": "actions.exit_start",
@@ -19,6 +20,7 @@
       ]
     }, 
     {
+      "id":"002",
       "name":"state1",
       "entry-action": "actions.entry_1",
       "exit-action": "actions.exit_1",
@@ -47,6 +49,7 @@
       ]
     }, 
     {
+      "id":"003",
       "name":"state2",
       "entry-action": "actions.entry_2",
       "exit-action": "actions.exit_2",
@@ -75,6 +78,7 @@
       ]
     }, 
     {
+      "id":"004",
       "name":"state3",
       "entry-action": "actions.entry_3",
       "exit-action": "actions.exit_3",
@@ -102,6 +106,7 @@
         }      ]
     }, 
     {
+      "id":"005",
       "name":"end",
       "entry-action": "actions.entry_end",
       "exit-action": "actions.exit_end",

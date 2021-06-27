@@ -7,7 +7,8 @@
   method for the target State is executed
 '''
 class State():
-  def __init__(self, name):
+  def __init__(self, id, name):
+    self.id = id
     self.name = name
     self.entry_action = None
     self.exit_action = None

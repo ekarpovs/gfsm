@@ -40,7 +40,9 @@ def main(**kwargs):
   fsm_builder = FsmBuilder(fsm_conf, fsm_def)
   fsm_impl = fsm_builder.build()
   # Instantiate the gfsm (create context)
-  fsm = FSM(fsm_impl, 'cntx_test')
+  fsm = FSM('cntx_test')
+  # Start the fsm engine with the context
+  fsm.start(fsm_impl)
 
   # Run test
   # state start

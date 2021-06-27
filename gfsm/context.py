@@ -6,12 +6,11 @@
   This action can be used to pre-define variables for the actions in the FSM.
 '''
 class Context():
-  def __init__(self, name, init_data):
+  def __init__(self, name, user_data):
     self.name = name
     #  an object repository for actions
-    self.data_repo = dict() # may be stack
-    self.data_repo['user-data'] = dict()
-    self.data_repo['user-data']['init-data'] = init_data
+    self.data_repo = dict()
+    self.data_repo['user-data'] = user_data
 
     self.current_state = None
     # This action is used to pre-define variables for the actions in the FSM
