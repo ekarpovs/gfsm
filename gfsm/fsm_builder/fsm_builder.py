@@ -41,8 +41,8 @@ class FsmBuilder():
       return self.action_wrapper(operation_loader.get(action_name))
     return None
 
-  def build_state(self, state_def):
-    id = self.get_value(state_def, 'id')
+  def build_state(self, state_def, idx):
+    id = idx
     name = self.get_value(state_def, 'name')
     entry_action = self.load_action(self.get_value(state_def, 'entry-action'))
     exit_action = self.load_action(self.get_value(state_def, 'exit-action'))
@@ -85,8 +85,8 @@ class FsmBuilder():
     # build states
     states_def = self.get_value(self.definition,'states')
     states = {}
-    for state_def in states_def:
-      state = self.build_state(state_def)
+    for i, state_def in enumerate(states_def):
+      state = self.build_state(state_def, i)
       states[state.name] = state
     # build transitions and sssociate events with Transition via State"
     for state_def in states_def:
