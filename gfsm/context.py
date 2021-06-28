@@ -23,10 +23,10 @@ class Context():
     if self.current_state is None and self.init_action is not None:
       self.init_action(self)
 
+    self.current_state = state
     entry_action = state.get_entry_action()
     if entry_action is not None:
       entry_action(self)
-    self.current_state = state
   
   # def get_current_state(self):
   #   return self.current_state
