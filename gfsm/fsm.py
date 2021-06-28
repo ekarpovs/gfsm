@@ -13,4 +13,8 @@ class FSM():
 
   def dispatch(self, event_name):
     self.context.dispatch(event_name)
-  
+    data = self.context.get('user-data')
+    if 'state-id' in data:
+      return data['state-id']
+    else:
+      return -1

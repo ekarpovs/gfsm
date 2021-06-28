@@ -27,6 +27,8 @@ class Context():
     entry_action = state.get_entry_action()
     if entry_action is not None:
       entry_action(self)
+    self.data_repo['user-data']['state-id'] = state.id
+
   
   # def get_current_state(self):
   #   return self.current_state
