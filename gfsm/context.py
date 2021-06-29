@@ -6,11 +6,10 @@
   This action can be used to pre-define variables for the actions in the FSM.
 '''
 class Context():
-  def __init__(self, name, user_data):
+  def __init__(self, name):
     self.name = name
     #  an object repository for actions
     self.data_repo = dict()
-    self.data_repo['user-data'] = user_data
 
     self.current_state = None
     # This action is used to pre-define variables for the actions in the FSM
@@ -27,11 +26,10 @@ class Context():
     entry_action = state.get_entry_action()
     if entry_action is not None:
       entry_action(self)
-    self.data_repo['user-data']['state-id'] = state.id
 
   
-  # def get_current_state(self):
-  #   return self.current_state
+  def get_current_state_id(self):
+    return self.current_state.id
 
   # store restore user data
   def put(self, key, data):
