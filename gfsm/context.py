@@ -35,10 +35,10 @@ class Context():
   def put(self, key, data):
     self.data_repo[key] = data
 
-  def get(self, key):
+  def get(self, key, default=None):
     if key in self.data_repo:
       return self.data_repo[key]
-    return None
+    return default
 
   # perform event
   def dispatch(self, event_name):
