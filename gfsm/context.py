@@ -10,7 +10,6 @@ class Context():
     self.name = name
     self.data_repo = dict()
     self.current_state = None
-    # This action is used to pre-define variables for the actions in the FSM
     self.init_action = None
 
   def set_init_action(self, action):
@@ -20,6 +19,9 @@ class Context():
     if self.current_state is None and self.init_action is not None:
       self.init_action(self)
     self.current_state = state
+    entry_action = self.current_state.get_entry_action()
+    if entry_action is not None:
+      entry_action(self)
   
   def get_current_state_id(self):
     return self.current_state.id

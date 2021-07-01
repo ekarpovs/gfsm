@@ -18,6 +18,3 @@ class Transition():
     if self.action is not None:
       self.action(context)
     context.set_current_state(self.target)
-    entry_action = self.target.get_entry_action()
-    if entry_action is not None:
-      entry_action(context)
