@@ -7,7 +7,7 @@
     {
       "name":"start",
       "entry-action": "actions.entry_start",
-      "exit-action": "actions.exit_start",
+      "exit-action": "____actions.exit_start",
       "transitions": [
         {
           "name": "tr01",

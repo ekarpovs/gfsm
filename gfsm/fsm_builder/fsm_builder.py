@@ -38,6 +38,10 @@ class FsmBuilder():
   # Load the action from actions implementation by name
   def load_action(self, action_name):
     if self.is_correct_action_name(action_name):
+      if action_name.startswith('____'):
+        # use defsult action's wrapper
+        action_name = action_name[4:]
+        return fsm_action(operation_loader.get(action_name))
       return self.action_wrapper(operation_loader.get(action_name))
     return None
 

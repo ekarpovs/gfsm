@@ -6,9 +6,6 @@ def fsm_action(implementation):
     print("default wrapper for action:", __name__)
     # Separate user functions from a FSM
 
-    # Get a relevant user data
-    data = {}
-    data = implementation(data)
 
     return context
 
