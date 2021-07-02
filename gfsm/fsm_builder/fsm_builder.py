@@ -63,6 +63,14 @@ class FsmBuilder():
     tr_action = self.get_value(tr_def, 'action')
     action = self.load_action(tr_action)
     transition = Transition(tr_name, target, action)
+    if 'start-action' in tr_def:
+      tr_start_action = self.get_value(tr_def, 'start-action')
+      start_action = self.load_action(tr_start_action)
+      transition.set_start_action(start_action)
+    if 'end-action' in tr_def:
+      tr_end_action = self.get_value(tr_def, 'end-action')
+      end_action = self.load_action(tr_end_action)
+      transition.set_end_action(end_action)
     # associate the event with Transition via State
     src = states[self.get_value(tr_def, 'src')]
     src.add_transition(tr_event, transition)

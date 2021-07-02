@@ -75,3 +75,9 @@ def action_3(data):
 def action_4(data):
   # Do thomething
   return data
+
+def start_transition(context):
+  return context
+
+def end_transition(context):
+  return context

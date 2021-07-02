@@ -13,4 +13,3 @@ class FSM():
 
   def dispatch(self, event_name):
     self.context.dispatch(event_name)
-    return self.context.get_current_state_id()

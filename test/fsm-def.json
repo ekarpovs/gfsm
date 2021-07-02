@@ -14,7 +14,9 @@
           "src": "start", 
           "event": "next", 
           "target": "state1",
-          "action": "actions.action_1" 
+          "action": "actions.action_1",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition"
         }
       ]
     }, 
@@ -28,21 +30,27 @@
           "src": "state1", 
           "event": "next", 
           "target": "state2",
-          "action": "actions.action_2" 
+          "action": "actions.action_2",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition"
         },
         {
           "name": "tr12",
           "src": "state1", 
           "event": "repeat", 
           "target": "state1",
-          "action": "" 
+          "action": "",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition"
         },
         {
           "name": "tr13",
           "src": "state1", 
           "event": "prev", 
           "target": "start",
-          "action": "" 
+          "action": "" ,
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition"
         }
       ]
     }, 
@@ -56,21 +64,27 @@
           "src": "state2", 
           "event": "next", 
           "target": "state3",
-          "action": "actions.action_3" 
+          "action": "actions.action_3",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition"
         },
         {
           "name": "tr22",
           "src": "state2", 
           "event": "repeat", 
           "target": "state2",
-          "action": "" 
+          "action": "",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition"
         },
         {
           "name": "tr23",
           "src": "state2", 
           "event": "prev", 
           "target": "state1",
-          "action": "" 
+          "action": "",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition" 
         }
       ]
     }, 
@@ -84,7 +98,9 @@
           "src": "state3", 
           "event": "next", 
           "target": "end",
-          "action": "actions.action_4" 
+          "action": "actions.action_4",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition" 
         },
         {
           "name": "tr32",
@@ -98,7 +114,9 @@
           "src": "state3", 
           "event": "prev", 
           "target": "state2",
-          "action": "" 
+          "action": "",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition" 
         }      ]
     }, 
     {
@@ -111,7 +129,9 @@
           "src": "end", 
           "event": "prev", 
           "target": "state3",
-          "action": "" 
+          "action": "",
+          "start-action": "____actions.start_transition",
+          "end-action": "____actions.end_transition" 
         }
       ]
     }
