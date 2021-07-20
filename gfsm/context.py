@@ -26,6 +26,9 @@ class Context():
   def get_current_state_id(self):
     return self.current_state.id
 
+  def get_current_state_name(self):
+    return self.current_state.name
+
   # store restore user data
   def put(self, key, data):
     self.data_repo[key] = data
