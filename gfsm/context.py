@@ -5,42 +5,61 @@
   Whenever a new FSMContext object is created (FSM instantiation), the init action is executed. 
   This action can be used to pre-define variables for the actions in the FSM.
 '''
+
+from .state import State
+
 class Context():
   def __init__(self, name):
-    self.name = name
-    self.data_repo = dict()
-    self.current_state = None
-    self.init_action = None
+    self._name = name
+    self._data_repo = dict()
+    self._current_state: State = None
+    self._init_action = None
 
-  def set_init_action(self, action):
-    self.init_action = action
+  @property
+  def init_action(self):
+    return self._init_action
 
-  def set_current_state(self, state):
+  @init_action.setter
+  def init_action(self, action):
+    self._init_action = action
+    return
+
+  @property
+  def current_state(self):
+    return self._current_state
+
+  @current_state.setter
+  def current_state(self, state):
     if self.current_state is None and self.init_action is not None:
       self.init_action(self)
-    self.current_state = state
-    entry_action = self.current_state.get_entry_action()
+    self._current_state = state
+    entry_action = self.current_state.entry_action
     if entry_action is not None:
       entry_action(self)
-  
-  def get_current_state_id(self):
-    return self.current_state.id
+    return
 
-  def get_current_state_name(self):
+  @property
+  def current_state_id(self):
+    return self.current_state.id
+ 
+  @property
+  def current_state_name(self):
     return self.current_state.name
 
   # store restore user data
-  def put(self, key, data):
-    self.data_repo[key] = data
+  @property
+  def user_data(self, key, data):
+    return self._data_repo[key]
 
-  def get(self, key, default=None):
-    if key in self.data_repo:
-      return self.data_repo[key]
-    return default
+  @user_data.setter
+  def user_data(self, key, data):
+    self._data_repo[key] = data
+    return
 
   # perform event
   def dispatch(self, event_name):
     print("current state", self.current_state.name)
     self.current_state.dispatch(self, event_name)
     print("new state", self.current_state.name)
+    return
   
