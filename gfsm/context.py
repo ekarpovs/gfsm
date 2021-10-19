@@ -31,6 +31,9 @@ class Context():
   @current_state.setter
   def current_state(self, state):
     if self.current_state is None and self.init_action is not None:
+      #   When a new FSMContext object is created (FSM instantiation), 
+      # the init action is executed. This action can
+      # be used to pre-define variables for the actions in the FSM.
       self.init_action(self)
     self._current_state = state
     entry_action = self.current_state.entry_action
@@ -47,12 +50,10 @@ class Context():
     return self.current_state.name
 
   # store restore user data
-  @property
-  def user_data(self, key, data):
-    return self._data_repo[key]
+  def get_user_data(self, key):
+    return self._data_repo.get(key)
 
-  @user_data.setter
-  def user_data(self, key, data):
+  def set_user_data(self, key, data):
     self._data_repo[key] = data
     return
 

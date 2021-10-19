@@ -10,7 +10,7 @@
 from .transition import Transition 
 
 class State():
-  def __init__(self, id, name):
+  def __init__(self, id=0, name=''):
     self.id = id
     self.name = name
     self._entry_action = None
