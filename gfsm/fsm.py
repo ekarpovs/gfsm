@@ -49,6 +49,8 @@ class FSM():
     first_state = fsm_impl.get('first-state', State())
     self.init_action = init_action
     self.current_state = first_state
+    if self.init_action is not None:
+      self.init_action(self._context)
     return
 
   def dispatch(self, event_name):

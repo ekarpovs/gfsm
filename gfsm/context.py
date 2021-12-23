@@ -30,11 +30,6 @@ class Context():
 
   @current_state.setter
   def current_state(self, state):
-    if self.current_state is None and self.init_action is not None:
-      #   When a new FSMContext object is created (FSM instantiation), 
-      # the init action is executed. This action can
-      # be used to pre-define variables for the actions in the FSM.
-      self.init_action(self)
     self._current_state = state
     entry_action = self.current_state.entry_action
     if entry_action is not None:
