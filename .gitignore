@@ -6,3 +6,4 @@ gfsm/fsm_builder/__pycache__
 test/__pycache__
 
 gfsm.egg-info
+*.bak

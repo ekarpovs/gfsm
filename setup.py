@@ -7,6 +7,6 @@ setup(name='gfsm',
       author='ekarpovs',
       author_email='',
       license='MIT',
-      packages=['gfsm','test','examples'],
+      packages=['gfsm','gfsm.fsm_builder','test','examples'],
       package_data={'examples':['*']},
       zip_safe=False)

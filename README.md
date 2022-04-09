@@ -29,7 +29,7 @@ _____
 
 ```bash
     cd gfsm
-    pip install -e .
+    pip install -e . --use-feature=in-tree-build
 ```
 
 ## Run test
