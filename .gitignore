@@ -1,4 +1,5 @@
 .vscode
+build
 __pycache__
 gfsm/__pycache__
 gfsm/context_builder/__pycache__
