@@ -37,20 +37,13 @@ class FSM():
     return len(self._states)
 
   @property
-  def current_state(self):
-    return self._context.current_state
-  
-  @current_state.setter
-  def current_state(self, state):
-    self._context.current_state = state
-
-  @property
   def current_state_id(self):
-    return self._context.current_state.id
+    current_state = self._states.get(self._context.current_state_name)
+    return current_state.id
 
   @property
   def current_state_name(self):
-    return self._context.current_state.name
+    return self._context.current_state_name
 
   def get_user_data(self, key):
     return self.context.get_user_data(key)
@@ -63,14 +56,13 @@ class FSM():
     init_action = self._fsm_impl.get('init-action', None)
     first_state = self._fsm_impl.get('first-state', State())
     self.init_action = init_action
-    self.current_state = first_state
+    self._context.current_state_name = first_state.name
     if self.init_action is not None:
       self.init_action(self._context)
     return
 
   def dispatch(self, event_name):
     # get current state name from the context
-    current_state_name = self._context.current_state_name
-    current_state = self._states.get(current_state_name)
+    current_state = self._states.get(self._context.current_state_name)
     current_state.dispatch(self.context, event_name)
     return
