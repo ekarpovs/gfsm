@@ -1,0 +1,73 @@
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+      <div class="mermaid">
+    
+        classDiagram
+          class Context {
+            current_state
+            current_state
+            current_state_id
+            current_state_name
+            init_action
+            init_action
+            dispatch(event_name)
+            get_user_data(key)
+            set_user_data(key, data)
+          }
+          class Event {
+            name
+          }
+          class FSM {
+            context
+            current_state
+            current_state
+            current_state_id
+            current_state_name
+            init_action
+            init_action
+            dispatch(event_name)
+            get_user_data(key)
+            set_user_data(key, data)
+            start(fsm_impl)
+          }
+          class FsmBuilder {
+            action_wrapper
+            config
+            definition
+            build()
+            build_state(state_def, idx)
+            build_transition(tr_def, states)
+            build_transitions(trs_def, states)
+            get_value(data, key)
+            is_correct_action_name(name)
+            load_action(action_name)
+            set_runtime_environment()
+          }
+          class State {
+            entry_action
+            entry_action : NoneType
+            exit_action
+            exit_action : NoneType
+            id
+            id : int
+            name
+            name : str
+            transitions
+            dispatch(context, event_name)
+          }
+          class Transition {
+            action
+            end_action
+            end_action : NoneType
+            name
+            start_action
+            start_action : NoneType
+            target
+            execute(context)
+          }
+          Context --* FSM : _context
+  
+       </div>
+  </body>
+</html>

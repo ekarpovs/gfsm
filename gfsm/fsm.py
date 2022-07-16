@@ -2,12 +2,19 @@
   This class is a central point of access to the FSM. 
 '''
 
+from typing import Dict, List
+
+from gfsm.fsm_builder.fsm_builder import FsmBuilder
 from .context import Context
 from .state import State
 
 class FSM():
-  def __init__(self, cntx_name):
-    self._context = Context(cntx_name)
+  def __init__(self, fsm_builder: FsmBuilder):
+    self._context = Context()
+    self._fsm_impl = fsm_builder.build()
+    self._events: List[str] = self._fsm_impl.get('events')
+    self._states: Dict[str, State] = self._fsm_impl.get('states')
+    self._context.current_state_name = self._fsm_impl.get('first-state').name
 
   @property
   def context(self):
@@ -44,9 +51,9 @@ class FSM():
     self.context.set_user_data(key, data)
     return
 
-  def start(self, fsm_impl):
-    init_action = fsm_impl.get('init-action', None)
-    first_state = fsm_impl.get('first-state', State())
+  def start(self) -> None:
+    init_action = self._fsm_impl.get('init-action', None)
+    first_state = self._fsm_impl.get('first-state', State())
     self.init_action = init_action
     self.current_state = first_state
     if self.init_action is not None:
@@ -54,5 +61,8 @@ class FSM():
     return
 
   def dispatch(self, event_name):
-    self._context.dispatch(event_name)
+    # get current state name from the context
+    current_state_name = self._context.current_state_name
+    current_state = self._states.get(current_state_name)
+    current_state.dispatch(self.context, event_name)
     return

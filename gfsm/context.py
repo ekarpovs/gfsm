@@ -6,13 +6,11 @@
   This action can be used to pre-define variables for the actions in the FSM.
 '''
 
-from .state import State
-
 class Context():
-  def __init__(self, name):
+  def __init__(self, name: str='test context'):
     self._name = name
     self._data_repo = dict()
-    self._current_state: State = None
+    self._current_state_name: str = ''
     self._init_action = None
 
   @property
@@ -25,24 +23,13 @@ class Context():
     return
 
   @property
-  def current_state(self):
-    return self._current_state
+  def current_state_name(self) -> str:
+    return self._current_state_name
 
-  @current_state.setter
-  def current_state(self, state):
-    self._current_state = state
-    entry_action = self.current_state.entry_action
-    if entry_action is not None:
-      entry_action(self)
+  @current_state_name.setter
+  def current_state_name(self, state_name) -> None:
+    self._current_state_name = state_name
     return
-
-  @property
-  def current_state_id(self):
-    return self.current_state.id
- 
-  @property
-  def current_state_name(self):
-    return self.current_state.name
 
   # store restore user data
   def get_user_data(self, key):
@@ -50,12 +37,5 @@ class Context():
 
   def set_user_data(self, key, data):
     self._data_repo[key] = data
-    return
-
-  # perform event
-  def dispatch(self, event_name):
-    print("current state", self.current_state.name)
-    self.current_state.dispatch(self, event_name)
-    print("new state", self.current_state.name)
     return
   

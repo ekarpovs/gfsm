@@ -38,11 +38,11 @@ def main(**kwargs):
   fsm_def = readDef()
   # Create single fsm engine
   fsm_builder = FsmBuilder(fsm_conf, fsm_def)
-  fsm_impl = fsm_builder.build()
+  # fsm_impl = fsm_builder.build()
   # Instantiate the gfsm (create context)
-  fsm = FSM('cntx_test')
+  fsm = FSM(fsm_builder)
   # Start the fsm engine with the context
-  fsm.start(fsm_impl)
+  fsm.start()
 
   # Run test
   # state start
@@ -50,17 +50,17 @@ def main(**kwargs):
   # state 1 
   fsm.dispatch('prev')
   fsm.dispatch('next')
-  fsm.dispatch('repeat')
+  fsm.dispatch('current')
   fsm.dispatch('next')
   # state 2
   fsm.dispatch('prev')
   fsm.dispatch('next')
-  fsm.dispatch('repeat')
+  fsm.dispatch('current')
   fsm.dispatch('next')
   # state 3
   fsm.dispatch('prev')
   fsm.dispatch('next')
-  fsm.dispatch('repeat')
+  fsm.dispatch('current')
   fsm.dispatch('next')
   # state end
   fsm.dispatch('prev')
