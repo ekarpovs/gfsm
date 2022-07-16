@@ -29,6 +29,14 @@ class FSM():
     self._context.init_action = action
 
   @property
+  def state_names(self):
+    return list(self._states.keys())
+
+  @property
+  def number_of_states(self):
+    return len(self._states)
+
+  @property
   def current_state(self):
     return self._context.current_state
   

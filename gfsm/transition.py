@@ -42,5 +42,5 @@ class Transition():
       self.action(context)
     if self.end_action is not None:
       self.end_action(context)
-    context.current_state = self.target
+    context.current_state_name = self.target.name
     return
