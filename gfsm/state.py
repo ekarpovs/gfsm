@@ -8,10 +8,12 @@
 '''
 
 from typing import Dict
-from .transition import Transition 
+
+from gfsm.context import Context
+from gfsm.transition import Transition 
 
 class State():
-  def __init__(self, id=0, name=''):
+  def __init__(self, id: int=0, name: str=''):
     self.id = id
     self.name = name
     self._entry_action = None
@@ -19,20 +21,20 @@ class State():
     self._transitions: Dict[str, Transition] = dict()
 
   @property
-  def id(self):
+  def id(self) -> int:
     return self._id
 
   @id.setter
-  def id(self, id):
+  def id(self, id: int) -> None:
     self._id = id
     return
 
   @property
-  def name(self):
+  def name(self) -> str:
     return self._name
 
   @name.setter
-  def name(self, name):
+  def name(self, name: str) -> None:
     self._name = name
     return
 
@@ -56,10 +58,10 @@ class State():
 
   # property to associate event with transitions.
   @property
-  def transitions(self):
+  def transitions(self) -> Dict[str, Transition]:
     return self._transitions
 
-  def dispatch(self, context, event_name):
+  def dispatch(self, context: Context, event_name: str) -> None:
     if event_name in self.transitions:
       if self.exit_action is not None:
         self.exit_action(context)

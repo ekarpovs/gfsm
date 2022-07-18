@@ -38,7 +38,7 @@ class Transition():
   def end_action(self, action):
     self._end_action = action
 
-  def execute(self, context: Context):
+  def execute(self, context: Context) -> None:
     if self.start_action is not None:
       self.start_action(context)
     if self.action is not None:

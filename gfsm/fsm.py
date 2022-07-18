@@ -5,8 +5,8 @@
 from typing import Dict, List
 
 from gfsm.fsm_builder.fsm_builder import FsmBuilder
-from .context import Context
-from .state import State
+from gfsm.context import Context
+from gfsm.state import State
 
 class FSM():
   def __init__(self, fsm_builder: FsmBuilder):

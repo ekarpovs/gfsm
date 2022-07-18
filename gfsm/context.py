@@ -6,6 +6,9 @@
   This action can be used to pre-define variables for the actions in the FSM.
 '''
 
+from typing import Dict
+
+
 class Context():
   def __init__(self, name: str='test context'):
     self._name = name
@@ -32,10 +35,10 @@ class Context():
     return
 
   # store restore user data
-  def get_user_data(self, key):
+  def get_user_data(self, key: str) -> Dict:
     return self._data_repo.get(key)
 
-  def set_user_data(self, key, data):
+  def set_user_data(self, key: str, data: Dict) -> None:
     self._data_repo[key] = data
     return
   

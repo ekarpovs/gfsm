@@ -1,30 +1,31 @@
+from typing import Dict, List
 import operation_loader
 import sys
 
 from gfsm.transition import Transition
 from gfsm.event import Event
 from gfsm.state import State
-from ..action import fsm_action
+from gfsm.action import fsm_action
 
 class FsmBuilder():
-  def __init__(self, config, definition):
+  def __init__(self, config: Dict, definition: Dict):
     self.config = config
     self.definition = definition
     self.action_wrapper = fsm_action
 
   @staticmethod
-  def is_correct_action_name(name):
+  def is_correct_action_name(name: str) -> bool:
     if name and name.strip() and len(name) >= 3 and '.' in name:
       return True
     return False
 
   @staticmethod
-  def get_value(data, key):
+  def get_value(data: Dict, key: str) -> List[str] | str:
     if key and key.strip() and key in data:
       return data[key]
     return ''
 
-  def set_runtime_environment(self):
+  def set_runtime_environment(self) -> None:
     user_actions_paths = self.get_value(self.config, 'user-actions-paths')
     for path in user_actions_paths:
       sys.path.append(path)
@@ -46,18 +47,17 @@ class FsmBuilder():
     return None
 
 
-  def build_state(self, state_def, idx):
-    id = idx
+  def build_state(self, state_def: Dict, idx: int) -> State:
     name = self.get_value(state_def, 'name')
     entry_action = self.load_action(self.get_value(state_def, 'entry-action'))
     exit_action = self.load_action(self.get_value(state_def, 'exit-action'))
-    state = State(id, name)
+    state = State(idx, name)
     state.entry_action = entry_action
     state.exit_action = exit_action     
     return state
 
 
-  def build_transition(self, tr_def, states):
+  def build_transition(self, tr_def: Dict, states: List[State]) -> Transition:
     tr_name = self.get_value(tr_def, 'name')
     tr_event = self.get_value(tr_def, 'event')
     target = states[self.get_value(tr_def, 'target')] 
@@ -78,13 +78,13 @@ class FsmBuilder():
     return transition
 
 
-  def build_transitions(self, trs_def, states):
+  def build_transitions(self, trs_def: Dict, states: List[State]) -> None:
     for tr_def in trs_def:
       self.build_transition(tr_def, states)
     return
 
 
-  def build(self):
+  def build(self) -> Dict:
     self.set_runtime_environment()
     print("FSM bulder. Build the fsm implementation from: {}".format(self.config['info']))
     fsm_implementation = {}
