@@ -7,6 +7,7 @@
   method for the target State is executed
 '''
 
+from typing import Dict
 from .transition import Transition 
 
 class State():
@@ -15,7 +16,7 @@ class State():
     self.name = name
     self._entry_action = None
     self._exit_action = None
-    self._transitions = dict()
+    self._transitions: Dict[str, Transition] = dict()
 
   @property
   def id(self):
@@ -58,17 +59,12 @@ class State():
   def transitions(self):
     return self._transitions
 
-  # @transitions.setter
-  # def transition(self, even_name, transition: Transition):
-  #   self.transitions[even_name] = transition
-  #   return
-
   def dispatch(self, context, event_name):
     if event_name in self.transitions:
       if self.exit_action is not None:
         self.exit_action(context)
       tr = self.transitions[event_name]
-      print("src {} dispatch event {} - Transition {} to {}".format(self.name, event_name, tr.name, tr.target.name))
+      print("src {} dispatch event {} - Transition {} to {}".format(self.name, event_name, tr.name, tr.target_name))
       self.transitions[event_name].execute(context)
     else:
       print("src {} dispatch event {} - stay at the state".format(self.name, event_name))

@@ -63,7 +63,7 @@ class FsmBuilder():
     target = states[self.get_value(tr_def, 'target')] 
     tr_action = self.get_value(tr_def, 'action')
     action = self.load_action(tr_action)
-    transition = Transition(tr_name, target, action)
+    transition = Transition(tr_name, target.name, action)
     if 'start-action' in tr_def:
       tr_start_action = self.get_value(tr_def, 'start-action')
       start_action = self.load_action(tr_start_action)

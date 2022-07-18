@@ -58,7 +58,7 @@ class FSM():
     return
 
   def dispatch(self, event_name):
-    # get current state name from the context
+    # get current state by name
     current_state = self._states.get(self._context.current_state_name)
     current_state.dispatch(self._context, event_name)
     return
