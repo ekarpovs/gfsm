@@ -10,8 +10,6 @@
           }
           class context {
           }
-          class event {
-          }
           class fsm {
           }
           class fsm_builder {
@@ -23,14 +21,18 @@
           class transition {
           }
           gfsm --> fsm
-          context --> state
+          action --> context
           fsm --> context
+          fsm --> fsm_builder
           fsm --> state
+          fsm --> transition
           fsm_builder --> fsm_builder
-          fsm_builder --> event
+          fsm_builder --> action
           fsm_builder --> state
           fsm_builder --> transition
+          state --> context
           state --> transition
+          transition --> context
   
        </div>
   </body>

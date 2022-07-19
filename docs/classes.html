@@ -5,44 +5,31 @@
     
         classDiagram
           class Context {
-            current_state
-            current_state
-            current_state_id
+            current_state_name
             current_state_name
             init_action
             init_action
-            dispatch(event_name)
-            get_user_data(key)
-            set_user_data(key, data)
-          }
-          class Event {
-            name
+            get_user_data(key: str) Dict
+            set_user_data(key: str, data: Dict) None
           }
           class FSM {
-            context
-            current_state
-            current_state
             current_state_id
             current_state_name
             init_action
-            init_action
+            number_of_states
+            state_names
             dispatch(event_name)
             get_user_data(key)
             set_user_data(key, data)
-            start(fsm_impl)
+            start() None
           }
           class FsmBuilder {
-            action_wrapper
-            config
-            definition
-            build()
-            build_state(state_def, idx)
-            build_transition(tr_def, states)
-            build_transitions(trs_def, states)
-            get_value(data, key)
-            is_correct_action_name(name)
-            load_action(action_name)
-            set_runtime_environment()
+            events
+            first_state_name
+            init_action
+            states
+            build() None
+            get_value(data: Dict, key: str) List[str] | str
           }
           class State {
             entry_action
@@ -54,7 +41,7 @@
             name
             name : str
             transitions
-            dispatch(context, event_name)
+            dispatch(context: Context, event_name: str) None
           }
           class Transition {
             action
@@ -63,8 +50,8 @@
             name
             start_action
             start_action : NoneType
-            target
-            execute(context)
+            target_name
+            execute(context: Context) None
           }
           Context --* FSM : _context
   
