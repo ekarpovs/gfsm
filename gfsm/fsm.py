@@ -1,5 +1,5 @@
 '''
-  This class is a central point of access to the FSM. 
+  This class is a central point of access to the FSM.
 '''
 
 from typing import Dict, List
@@ -7,7 +7,7 @@ from typing import Dict, List
 from gfsm.fsm_builder.fsm_builder import FsmBuilder
 from gfsm.context import Context
 from gfsm.state import State
-from gfsm.transition import Transition
+
 
 class FSM():
   def __init__(self, fsm_builder: FsmBuilder):
@@ -16,12 +16,12 @@ class FSM():
     self._events: List[str] = fsm_builder.events
     self._states: Dict[str, State] = fsm_builder.states
     self._context.current_state_name = fsm_builder.first_state_name
-    self._init_action = fsm_builder.init_action    
+    self._init_action = fsm_builder.init_action
 
   @property
   def init_action(self):
     return self._context.init_action
-  
+
   @init_action.setter
   def init_action(self, action):
     self._context.init_action = action
@@ -58,9 +58,9 @@ class FSM():
   def dispatch(self, event_name):
     # get current state by name
     current_state = self._states.get(self._context.current_state_name)
-    # TODO: 
+    # TODO:
     # get the state transition for the event from transitions list
     # need to refactor builder
-    # 
+    #
     current_state.dispatch(self._context, event_name)
     return

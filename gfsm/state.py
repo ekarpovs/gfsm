@@ -1,19 +1,24 @@
 '''
-  This class models the states in the FSM. Each State has a name that can be set as a property
-  in this class. State also provides a method to associate events with transitions. It also provides a
-  dispatch method to trigger transitions for incoming events. The dispatch method (after finding the
-  right transition) first executes the state-exit action. Subsequently the transition is executed and then
-  the target State in the transition is set as the current State in the context. Finally the state-entry
+  This class models the states in the FSM.
+  Each State has a name that can be set as a property
+  in this class. State also provides a method to associate events
+  with transitions. It also provides a dispatch method to trigger
+  transitions for incoming events. The dispatch method (after finding the
+  right transition) first executes the state-exit action.
+  Subsequently the transition is executed and then
+  the target State in the transition is set as the current
+  State in the context. Finally the state-entry
   method for the target State is executed
 '''
 
 from typing import Dict
 
 from gfsm.context import Context
-from gfsm.transition import Transition 
+from gfsm.transition import Transition
+
 
 class State():
-  def __init__(self, id: int=0, name: str=''):
+  def __init__(self, id: int = 0, name: str = ''):
     self.id = id
     self.name = name
     self._entry_action = None
@@ -56,7 +61,6 @@ class State():
     self._exit_action = action
     return
 
-  # property to associate event with transitions.
   @property
   def transitions(self) -> Dict[str, Transition]:
     return self._transitions
@@ -66,8 +70,10 @@ class State():
       if self.exit_action is not None:
         self.exit_action(context)
       tr = self.transitions[event_name]
-      print("src {} dispatch event {} - Transition {} to {}".format(self.name, event_name, tr.name, tr.target_name))
+      print("src {} dispatch event {} - Transition {} to {}"
+            .format(self.name, event_name, tr.name, tr.target_name))
       self.transitions[event_name].execute(context)
     else:
-      print("src {} dispatch event {} - stay at the state".format(self.name, event_name))
+      print("src {} dispatch event {} - stay at the state"
+            .format(self.name, event_name))
     return
