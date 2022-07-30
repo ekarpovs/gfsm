@@ -25,6 +25,10 @@ class FSM():
     return self._states
 
   @property
+  def state_names(self):
+    return list(self._states.keys())
+
+  @property
   def number_of_states(self) -> int:
     return len(self._states)
 
