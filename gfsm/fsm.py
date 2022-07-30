@@ -25,8 +25,17 @@ class FSM():
     return self._states
 
   @property
+  def number_of_states(self) -> int:
+    return len(self._states)
+
+  @property
   def init_action(self):
     return self._init_action
+
+  def start(self) -> None:
+    if self._init_action is not None:
+      self._init_action()
+    return
 
   def dispatch(self, event_name, context: Context):
     # get current state by name
