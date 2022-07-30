@@ -6,6 +6,7 @@ import argparse
 import json
 
 from gfsm.fsm import FSM
+from gfsm.context import Context
 from gfsm.fsm_builder.fsm_builder import FsmBuilder
 
 # Construct the argument parser and parse the arguments
@@ -38,32 +39,33 @@ def main(**kwargs):
   fsm_def = readDef()
   # Create single fsm engine
   fsm_builder = FsmBuilder(fsm_conf, fsm_def)
-  # fsm_impl = fsm_builder.build()
-  # Instantiate the gfsm (create context)
   fsm = FSM(fsm_builder)
-  # Start the fsm engine with the context
-  fsm.start()
+  # create context
+  context = Context('test')
+  context.current_state_name = fsm_builder.first_state_name
+  # Start the fsm engine
+  # fsm.start()
 
-  # Run test
+  # Run test  
   # state start
-  fsm.dispatch('next')
+  fsm.dispatch('next', context)
   # state 1 
-  fsm.dispatch('prev')
-  fsm.dispatch('next')
-  fsm.dispatch('current')
-  fsm.dispatch('next')
+  fsm.dispatch('prev', context)
+  fsm.dispatch('next', context)
+  fsm.dispatch('current', context)
+  fsm.dispatch('next', context)
   # state 2
-  fsm.dispatch('prev')
-  fsm.dispatch('next')
-  fsm.dispatch('current')
-  fsm.dispatch('next')
+  fsm.dispatch('prev', context)
+  fsm.dispatch('next', context)
+  fsm.dispatch('current', context)
+  fsm.dispatch('next', context)
   # state 3
-  fsm.dispatch('prev')
-  fsm.dispatch('next')
-  fsm.dispatch('current')
-  fsm.dispatch('next')
+  fsm.dispatch('prev', context)
+  fsm.dispatch('next', context)
+  fsm.dispatch('current', context)
+  fsm.dispatch('next', context)
   # state end
-  fsm.dispatch('prev')
+  fsm.dispatch('prev', context)
 
 
 

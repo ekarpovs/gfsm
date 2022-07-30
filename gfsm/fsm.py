@@ -3,64 +3,33 @@
 '''
 
 from typing import Dict, List
+from gfsm.context import Context
 
 from gfsm.fsm_builder.fsm_builder import FsmBuilder
-from gfsm.context import Context
 from gfsm.state import State
 
 
 class FSM():
   def __init__(self, fsm_builder: FsmBuilder):
-    self._context = Context()
     fsm_builder.build()
     self._events: List[str] = fsm_builder.events
     self._states: Dict[str, State] = fsm_builder.states
-    self._context.current_state_name = fsm_builder.first_state_name
     self._init_action = fsm_builder.init_action
 
   @property
+  def events(self) -> List[str]:
+    return self._events
+
+  @property
+  def states(self) -> Dict[str, State]:
+    return self._states
+
+  @property
   def init_action(self):
-    return self._context.init_action
+    return self._init_action
 
-  @init_action.setter
-  def init_action(self, action):
-    self._context.init_action = action
-
-  @property
-  def state_names(self):
-    return list(self._states.keys())
-
-  @property
-  def number_of_states(self):
-    return len(self._states)
-
-  @property
-  def current_state_id(self):
-    current_state = self._states.get(self._context.current_state_name)
-    return current_state.id
-
-  @property
-  def current_state_name(self):
-    return self._context.current_state_name
-
-  def get_user_data(self, key):
-    return self._context.get_user_data(key)
-
-  def set_user_data(self, key, data):
-    self._context.set_user_data(key, data)
-    return
-
-  def start(self) -> None:
-    if self._init_action is not None:
-      self._init_action(self._context)
-    return
-
-  def dispatch(self, event_name):
+  def dispatch(self, event_name, context: Context):
     # get current state by name
-    current_state = self._states.get(self._context.current_state_name)
-    # TODO:
-    # get the state transition for the event from transitions list
-    # need to refactor builder
-    #
-    current_state.dispatch(self._context, event_name)
+    current_state = self._states.get(context.current_state_name)
+    current_state.dispatch(context, event_name)
     return

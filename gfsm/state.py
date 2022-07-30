@@ -11,7 +11,7 @@
   method for the target State is executed
 '''
 
-from typing import Dict
+from typing import Callable, Dict
 
 from gfsm.context import Context
 from gfsm.transition import Transition
@@ -44,20 +44,20 @@ class State():
     return
 
   @property
-  def entry_action(self):
+  def entry_action(self) -> Callable:
     return self._entry_action
 
   @entry_action.setter
-  def entry_action(self, action):
+  def entry_action(self, action: Callable) -> None:
     self._entry_action = action
     return
 
   @property
-  def exit_action(self):
+  def exit_action(self) -> Callable:
     return self._exit_action
 
   @exit_action.setter
-  def exit_action(self, action):
+  def exit_action(self, action: Callable) -> None:
     self._exit_action = action
     return
 

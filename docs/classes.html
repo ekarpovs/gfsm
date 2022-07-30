@@ -6,22 +6,14 @@
         classDiagram
           class Context {
             current_state_name
-            current_state_name
-            init_action
-            init_action
             get_user_data(key: str) Dict
             set_user_data(key: str, data: Dict) None
           }
           class FSM {
-            current_state_id
-            current_state_name
+            events
             init_action
-            number_of_states
-            state_names
-            dispatch(event_name)
-            get_user_data(key)
-            set_user_data(key, data)
-            start() None
+            states
+            dispatch(event_name, context: Context)
           }
           class FsmBuilder {
             events
@@ -47,13 +39,12 @@
             action
             end_action
             end_action : NoneType
-            name
+            name : str
             start_action
             start_action : NoneType
             target_name
             execute(context: Context) None
           }
-          Context --* FSM : _context
   
        </div>
   </body>
